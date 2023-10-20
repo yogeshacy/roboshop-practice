@@ -1,3 +1,5 @@
+set -e
+
 yum install maven -y
 
 yum install maven -y

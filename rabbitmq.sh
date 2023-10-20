@@ -1,3 +1,5 @@
+set -e
+
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
 
 yum install erlang -y
