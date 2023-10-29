@@ -12,11 +12,11 @@ StatusCheck
 DOWNLOAD
 
 echo cleaning old content
-cd /usr/share/nginx/html && rm -rf * &>>&{LOG}
+cd /usr/share/nginx/html && rm -rf * &>>${LOG}
 StatusCheck
 
 echo Extract Downloaded Coneten
-unzip -o /tmp/frontend.zip &>>&{LOG} && mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+unzip -o /tmp/frontend.zip &>>${LOG} && mv frontend-main/static/* . &>>${LOG} && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 StatusCheck
 
 echo start Nginx service
