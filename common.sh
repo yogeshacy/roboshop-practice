@@ -9,6 +9,13 @@ StatusCheck() {
   fi
 }
 
+DOWNLOAD() {
+  echo Downloading ${COMPONENT} app content
+  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>> /tmp/${COMPONENT}.log
+  StatusCheck
+
+}
+
 NODEJS() {
   echo Setting NodeJS repo
   curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash - &>> /tmp/${COMPONENT}.log
@@ -24,14 +31,11 @@ NODEJS() {
     useradd roboshop &>> /tmp/${COMPONENT}.log
     StatusCheck
   fi
-  
-  echo Downloading app content
-  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>> /tmp/${COMPONENT}.log
-  cd /home/roboshop &>> /tmp/${COMPONENT}.log
-  StatusCheck
-  
+
+  DOWNLOAD
+
   echo Cleaning old app content
-  rm -rf ${COMPONENT} &>> /tmp/${COMPONENT}.log
+   cd /home/roboshop &>> /tmp/${COMPONENT}.log && rm -rf ${COMPONENT} &>> /tmp/${COMPONENT}.log
   StatusCheck
   
   echo Extracting App archive
@@ -52,7 +56,10 @@ NODEJS() {
 }
 
 USER_ID=&(id -u)
-if []; then
+if [ $USER_ID -ne 0 ]; then
   echo -e "\e[31m You should run this script root or sudo user\e[0m"
   exit 1
 fi
+
+LOG=&>> /tmp/${COMPONENT}.log
+rm -rf ${LOG}
