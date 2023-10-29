@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -e
+#set -e
+COMPONENT=rabbitmq
+source common.sh
 
 yum install python36 gcc python3-devel -y
 
