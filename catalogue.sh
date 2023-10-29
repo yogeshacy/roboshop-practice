@@ -3,7 +3,7 @@
 set -e
 
 source common.sh
-
+COMPONENT=catalogue
 NODEJS
 
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
