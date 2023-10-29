@@ -1,21 +1,31 @@
 #!/bin/bash
 
-set -e
+#set -e
+source common.sh
+COMPONENT=rabbitmq
 
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
+if [ -z "$APP_RABBITMQ_PASSWORD"]; then
+  echo -e "\e[33m env app password needed \e[0m"
+  exit 1
+fi
+echo Setup yum repo
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash &>>${LOG}
+StatusCheck
 
-yum install erlang -y
+echo Install Earlang and Rabbitmq
+yum install erlang -y &>>${LOG}
 
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>${LOG}
 
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash &>>${LOG}
 
-yum install erlang -y
+yum install erlang -y &>>${LOG}
+StatusCheck
 
-systemctl enable rabbitmq-server
-systemctl start rabbitmq-server
+echo Start rabbitmq service
+systemctl enable rabbitmq-server &>>${LOG} && systemctl start rabbitmq-server &>>${LOG}
+StatusCheck
 
-rabbitmqctl add_user roboshop roboshop123
-rabbitmqctl set_user_tags roboshop administrator
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
-
+echo Add app user in rmq
+rabbitmqctl add_user roboshop $APP_RABBITMQ_PASSWORD &>>${LOG} && rabbitmqctl set_user_tags roboshop administrator &>>${LOG} && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOG}
+StatusCheck
