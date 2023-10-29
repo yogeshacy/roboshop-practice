@@ -18,7 +18,7 @@ StatusCheck
 
 echo "show databases;" | grep -uroot -p$MYSQL_PASSWORD &>>${LOG}
 if [ $? -ne 0 ]; then
-  DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk  '{print $NF}')
+    DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk  '{print $NF}')
   echo "alter user 'root'@'localhost' identified with mysql_native_password by '$MYSQL_PASSWORD';" | mysql -uroot -p${DEFAULT_PASSWORD}
   StatusCheck
 fi
