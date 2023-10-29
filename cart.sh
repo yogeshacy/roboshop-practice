@@ -6,7 +6,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo Installing NodeJS
@@ -15,7 +15,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo adding application user
@@ -24,7 +24,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo Downloading app content
@@ -34,7 +34,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo Cleaning old app content
@@ -43,7 +43,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo Extracting App archive
@@ -54,7 +54,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo Installing NodeJS  Dependencies
@@ -63,7 +63,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo Config the systemD service
@@ -73,7 +73,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1
 fi
 
 echo Startng Cart servcie
@@ -83,6 +83,6 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSuccess\e[0m"
 else
   echo -e "\e[31mFailed\e[0m"
-  exit
+  exit 1  
 fi
 
