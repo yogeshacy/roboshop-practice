@@ -20,6 +20,6 @@ unzip -o /tmp/frontend.zip &>>${LOG} && mv frontend-main/static/* . &>>${LOG} &&
 StatusCheck
 
 echo start Nginx service
-systemctl restart nginx &>>&{LOG} && systemctl enable nginx &>>&{LOG}
+systemctl restart nginx &>>${LOG} && systemctl enable nginx &>>${LOG}
 StatusCheck
 
